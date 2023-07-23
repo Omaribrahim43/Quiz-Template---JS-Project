@@ -88,6 +88,32 @@ registrationInputs[3].onkeyup = () => {
       document.getElementById("c-pass-message").style.color = "red";
     } else {
       document.getElementById("c-pass-message").innerHTML = "";
+      document.getElementById("c-pass-message").style.color = "green";
     }
+  }
+};
+const regBTN = document.getElementById("regBTN");
+
+regBTN.onclick = function () {
+  let email = registrationInputs[0].value;
+  let username = registrationInputs[1].value;
+  let password = registrationInputs[2].value;
+  localStorage.setItem("email", email);
+  localStorage.setItem("username", username);
+  localStorage.setItem("password", password);
+};
+
+const logBTN = document.getElementById("logBTN");
+const emailOrUsername = document.getElementById("emailOrUsername");
+const pas = document.getElementById("pas");
+logBTN.onclick = function () {
+  if (
+    (emailOrUsername.value === localStorage.getItem("email") ||
+      emailOrUsername.value === localStorage.getItem("username")) &&
+    pas.value === localStorage.getItem("password")
+  ) {
+    console.log("login success");
+  }else{
+    console.log("login unsuccess");
   }
 };

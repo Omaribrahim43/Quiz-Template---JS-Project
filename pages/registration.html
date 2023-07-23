@@ -44,11 +44,11 @@
             <form id="loginForm" style="display: block">
               <h2 class="login-form form-title">Account Login</h2>
               <div class="input-field">
-                <input type="text" id="username" class="inp" required />
+                <input id="emailOrUsername" type="text" id="username" class="inp" required />
                 <label for="username" class="lbl"> Username or Email </label>
               </div>
               <div class="input-field delay-100ms">
-                <input type="password" id="password" class="inp" required />
+                <input id="pas" type="password" id="password" class="inp" required />
                 <label for="text" class="lbl"> Password </label>
               </div>
               <div class="rememberme">
@@ -61,7 +61,7 @@
                 </div>
               </div>
               <div class="login-btn">
-                <button type="button" class="btn">
+                <button id="logBTN" type="button" class="btn">
                   Login to your Account!
                 </button>
               </div>
@@ -94,14 +94,14 @@
                 <span id="username-message"></span>
               </div>
               <div class="input-field">
-                <input type="password" id="pass" class="inp" required />
+                <input type="password" id="password" class="inp" required />
                 <label for="text" class="lbl">Password</label>
                 <span id="pass-message"></span>
               </div>
               <div class="input-field">
                 <input
                   type="password"
-                  id="r-pass"
+                  id="repeat-password"
                   class="inp"
                   required
                 />
@@ -112,7 +112,7 @@
                 <a href="#" class="acc">already have an account ?</a>
               </div>
               <div class="login-btn">
-                <button class="btn">Register Now</button>
+                <button id="regBTN" class="btn">Register Now</button>
               </div>
             </form>
           </div>
