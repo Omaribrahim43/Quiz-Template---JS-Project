@@ -92,28 +92,35 @@ registrationInputs[3].onkeyup = () => {
     }
   }
 };
+
 const regBTN = document.getElementById("regBTN");
 
 regBTN.onclick = function () {
-  let email = registrationInputs[0].value;
-  let username = registrationInputs[1].value;
-  let password = registrationInputs[2].value;
-  localStorage.setItem("email", email);
-  localStorage.setItem("username", username);
-  localStorage.setItem("password", password);
-};
-
-const logBTN = document.getElementById("logBTN");
-const emailOrUsername = document.getElementById("emailOrUsername");
-const pas = document.getElementById("pas");
-logBTN.onclick = function () {
+  let email1 = registrationInputs[0].value;
+  let username1 = registrationInputs[1].value;
+  let password1 = registrationInputs[2].value;
   if (
-    (emailOrUsername.value === localStorage.getItem("email") ||
-      emailOrUsername.value === localStorage.getItem("username")) &&
-    pas.value === localStorage.getItem("password")
+    document.getElementById("email-message").style.color === "green" &&
+    document.getElementById("username-message").style.color === "green" &&
+    document.getElementById("pass-message").style.color === "green" &&
+    document.getElementById("c-pass-message").style.color === "green"
   ) {
-    console.log("login success");
-  }else{
-    console.log("login unsuccess");
+    window.alert("registration success");
+    let users1 = [];
+    let user = {
+      email: email1,
+      username: username1,
+      password: password1,
+    };
+    if (localStorage.users != null) {
+      users1 = JSON.parse(localStorage.users);
+    } else {
+      users1 = [];
+    }
+    users1.push(user);
+
+    localStorage.setItem("users", JSON.stringify(users1));
+  } else {
+    window.alert("registration unsuccess");
   }
 };

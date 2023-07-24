@@ -44,11 +44,23 @@
             <form id="loginForm" style="display: block">
               <h2 class="login-form form-title">Account Login</h2>
               <div class="input-field">
-                <input id="emailOrUsername" type="text" id="username" class="inp" required />
+                <input
+                  id="emailOrUsername"
+                  type="text"
+                  id="username"
+                  class="inp"
+                  required
+                />
                 <label for="username" class="lbl"> Username or Email </label>
               </div>
               <div class="input-field delay-100ms">
-                <input id="pas" type="password" id="password" class="inp" required />
+                <input
+                  id="pas"
+                  type="password"
+                  id="password"
+                  class="inp"
+                  required
+                />
                 <label for="text" class="lbl"> Password </label>
               </div>
               <div class="rememberme">
@@ -61,25 +73,25 @@
                 </div>
               </div>
               <div class="login-btn">
-                <button id="logBTN" type="button" class="btn">
+                <button id="logBTN" type="button" class="btn" onclick="auth()">
                   Login to your Account!
                 </button>
               </div>
               <div class="login-form signup_social">
-              <div class="divide-heading">
-                <span>Or login with your Social Account</span>
+                <div class="divide-heading">
+                  <span>Or login with your Social Account</span>
+                </div>
+                <div class="social-signup">
+                  <a class="facebook" href="#"
+                    ><i class="fa-brands fa-square-facebook"></i
+                  ></a>
+                  <a class="google" href="#"
+                    ><i class="fa-brands fa-google"></i
+                  ></a>
+                </div>
               </div>
-              <div class="social-signup">
-                <a class="facebook" href="#"
-                  ><i class="fa-brands fa-square-facebook"></i
-                ></a>
-                <a class="google" href="#"
-                  ><i class="fa-brands fa-google"></i
-                ></a>
-              </div>
-            </div>
             </form>
-            
+
             <!-- sign up -->
             <form id="registerForm" style="display: none">
               <h2 class="signup-form form-title">Create your Account!</h2>
@@ -119,6 +131,7 @@
         </div>
       </div>
     </main>
-    <script src="../js/main.js"></script>
+    <script src="../js/registration.js"></script>
+    <script src="../js/auth.js"></script>
   </body>
 </html>
