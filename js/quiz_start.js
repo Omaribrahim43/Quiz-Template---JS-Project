@@ -7,7 +7,9 @@ let radio1 = document.getElementById("radio1");
 let radio2 = document.getElementById("radio2");
 let radio3 = document.getElementById("radio3");
 let radio4 = document.getElementById("radio4");
+const login = localStorage.getItem("user");
 
+document.getElementById("nameSpan").innerHTML = JSON.parse(localStorage.getItem(login)[0]);
 let value_of_local = [];
 box_of_quastion.addEventListener("click", function (event) {
   const clickedElement = event.target;
@@ -25,13 +27,12 @@ box_of_quastion.addEventListener("click", function (event) {
   }
 });
 let json1 = new XMLHttpRequest();
-json1.open("GET", "../js/data.json");
+json1.open("GET", "../json/answers.json");
 let countofpage = 1;
 let countofquastion = 0;
 let arr = 0;
 let countofpage_tch = 0;
 next.addEventListener("click", function (event) {
-  console.log(countofquastion);
   for (let i = 0; i < answer.length; i++) {
     if (answer[i].childNodes[1].checked) {
       let value_of_answer = answer[i]

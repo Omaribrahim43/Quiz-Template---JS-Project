@@ -2,6 +2,8 @@ const loginButton = document.getElementById("showlogin");
 const registerButton = document.getElementById("showregister");
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
+const regBTN = document.getElementById("regBTN");
+const logBTN = document.getElementById("logBTN");
 
 loginButton.addEventListener("click", () => {
   loginButton.classList.add("active");
@@ -40,7 +42,7 @@ registrationInputs[0].onkeyup = () => {
 
 // regEx for username
 registrationInputs[1].onkeyup = () => {
-  let regex = /^[a-zA-Z0-9]{3,7}$/;
+  let regex = /^[a-zA-Z][a-zA-Z0-9_-]{2,19}$/;
   if (registrationInputs[1].value === "") {
     document.getElementById("username-message").innerHTML = "";
   } else {
@@ -92,9 +94,17 @@ registrationInputs[3].onkeyup = () => {
     }
   }
 };
-
-const regBTN = document.getElementById("regBTN");
-
+function getNewUserID() {
+  let lastUserID = localStorage.getItem("lastUserID");
+  if (lastUserID === null) {
+    lastUserID = 0;
+  } else {
+    lastUserID = parseInt(lastUserID);
+  }
+  const newUserID = lastUserID + 1;
+  localStorage.setItem("lastUserID", newUserID);
+  return newUserID;
+}
 regBTN.onclick = function () {
   let email1 = registrationInputs[0].value;
   let username1 = registrationInputs[1].value;
@@ -108,6 +118,7 @@ regBTN.onclick = function () {
     window.alert("registration success");
     let users1 = [];
     let user = {
+      id: getNewUserID(),
       email: email1,
       username: username1,
       password: password1,
@@ -122,5 +133,40 @@ regBTN.onclick = function () {
     localStorage.setItem("users", JSON.stringify(users1));
   } else {
     window.alert("registration unsuccess");
+  }
+};
+logBTN.onclick = function () {
+  const emailOrUsername = document.getElementById("emailOrUsername");
+  const pas = document.getElementById("pas");
+  let inputEmailOrUsername = emailOrUsername.value;
+  let inputPassword = pas.value;
+
+  if (localStorage.users != null) {
+    let users1 = JSON.parse(localStorage.users);
+    let loggedInUser = null;
+    // Check if the inputEmailOrUsername matches any user's email or username
+    for (let i = 0; i < users1.length; i++) {
+      if (
+        users1[i].email === inputEmailOrUsername ||
+        users1[i].username === inputEmailOrUsername
+      ) {
+        loggedInUser = users1[i];
+        break;
+      }
+    }
+    if (loggedInUser !== null && loggedInUser.password === inputPassword) {
+      window.location.assign("/index.html");
+      let user = [];
+      user.push(loggedInUser.username);
+      user.push(true);
+      localStorage.setItem("user", JSON.stringify(user));
+      //   const welcomeUsername = document.getElementById("welcomeUsername");
+      //   welcomeUsername.textContent = localStorage.getItem("personName");
+      // Perform any actions you need to do after successful login, e.g., redirect to a different page
+    } else {
+      window.alert("Invalid credentials. Please try again.");
+    }
+  } else {
+    window.alert("No registered users found. Please register first.");
   }
 };

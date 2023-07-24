@@ -15,14 +15,19 @@ logoutButtonIndex.addEventListener("click", function () {
 });
 signUpButtonIndex.addEventListener("click", function () {
   // take the user to the sign-up page
-
+  
   window.location.assign("../Pages/registration.html");
 });
 
-const quizButton = document.getElementById("btn");
+const quizButton = document.getElementById("start-quiz-btn");
 quizButton.addEventListener("click", function () {
   // take the user to the quiz page
-  window.location.assign("../Pages/quiz_start.html");
+  if (JSON.parse(login) == false) {
+    window.alert("Log in first or create an account");
+    window.location.assign("../Pages/registration.html");
+  } else {
+    window.location.assign("../Pages/quiz_start.html");
+  }
 });
 // ----------------------------------------------------------
 
