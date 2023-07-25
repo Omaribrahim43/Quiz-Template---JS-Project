@@ -9,7 +9,7 @@ let radio3 = document.getElementById("radio3");
 let radio4 = document.getElementById("radio4");
 const login = localStorage.getItem("user");
 
-document.getElementById("nameSpan").innerHTML = JSON.parse(localStorage.getItem(login)[0]);
+document.getElementById("nameSpan").innerHTML = ` ${JSON.parse(login)[0]}`;
 let value_of_local = [];
 box_of_quastion.addEventListener("click", function (event) {
   const clickedElement = event.target;

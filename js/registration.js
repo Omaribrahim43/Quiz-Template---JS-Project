@@ -94,6 +94,19 @@ registrationInputs[3].onkeyup = () => {
     }
   }
 };
+let u = localStorage.getItem("noAcc");
+if (JSON.parse(u)) {
+  loginButton.classList.add("active");
+  registerButton.classList.remove("active");
+  loginForm.style.display = "block";
+  registerForm.style.display = "none";
+} else{
+  loginButton.classList.remove("active");
+  registerButton.classList.add("active");
+  loginForm.style.display = "none";
+  registerForm.style.display = "block";
+}
+
 function getNewUserID() {
   let lastUserID = localStorage.getItem("lastUserID");
   if (lastUserID === null) {
@@ -160,9 +173,6 @@ logBTN.onclick = function () {
       user.push(loggedInUser.username);
       user.push(true);
       localStorage.setItem("user", JSON.stringify(user));
-      //   const welcomeUsername = document.getElementById("welcomeUsername");
-      //   welcomeUsername.textContent = localStorage.getItem("personName");
-      // Perform any actions you need to do after successful login, e.g., redirect to a different page
     } else {
       window.alert("Invalid credentials. Please try again.");
     }
