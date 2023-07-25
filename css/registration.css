@@ -223,5 +223,9 @@ body {
   border-radius: 8px;
 }
 /* END RIGHT SECTION */
-
+@media (max-width: 480px) {
+  body {
+    background-image: url(../images/login-registration-background-phone.png);
+  }
+}
 /* END LANDING CONTENT */

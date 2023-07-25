@@ -1,7 +1,7 @@
 const loginButtonIndex = document.getElementById("login");
 const signUpButtonIndex = document.getElementById("signup");
 const logoutButtonIndex = document.getElementById("logout");
-
+const login = localStorage.getItem("user");
 // ----------------------------------------------------------
 // take the user to the login page
 loginButtonIndex.addEventListener("click", function () {
@@ -25,28 +25,21 @@ signUpButtonIndex.addEventListener("click", function () {
 });
 // ----------------------------------------------------------
 // take the user to the quiz page.
-const login = localStorage.getItem("user");
+
 const quizButton = document.getElementById("start-quiz-btn");
 quizButton.addEventListener("click", function () {
-  // if he is logged in.
-  if (JSON.parse(login)[1]) {
-    window.location.assign("../Pages/quiz_start.html");
-  }
-  // if he is not logged in.
-  else {
-    window.alert("Log in first or create an account");
-    window.location.assign("../Pages/registration.html");
-  }
+  // go to the rules page
+  window.location.assign("../pages/rules.html");
 });
 
 // ----------------------------------------------------------
 // checking if there is a user logged in or not to edit the content of the navbar.
 
-if (JSON.parse(login)[1] == true) {
+if (JSON.parse(login)[1] === true) {
   loginButtonIndex.style.display = "none";
   signUpButtonIndex.style.display = "none";
   logoutButtonIndex.style.display = "inline-block";
-  document.getElementById("welcomeUsername").innerText = `Welcome ${
+  document.getElementById("welcomeUsername").innerText = `${
     JSON.parse(login)[0]
   }`;
 } else {
