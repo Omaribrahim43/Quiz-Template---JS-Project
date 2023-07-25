@@ -138,7 +138,6 @@ ${countofpage}/5
  </div>
 </div>
 `;
-
         box_of_quastion.innerHTML = nextquastion;
         button1.addEventListener("click", function () {
           // fixed.classList.remove("fleex")
@@ -246,3 +245,39 @@ ${countofpage}/5
   }
 });
 json1.send();
+let countdownElement = document.getElementById("countdown");
+let timerInterval;
+let timerSeconds = 1200; // Total time in seconds (2 minutes)
+
+function startTimer() {
+  let currentTime = timerSeconds;
+  timerInterval = setInterval(() => {
+    currentTime--;
+    if (currentTime >= 0) {
+      updateTimer(currentTime);
+    } else {
+      clearInterval(timerInterval);
+      // Handle time up here (e.g., submitting the quiz)
+      handleTimeUp();
+    }
+  }, 1000);
+}
+
+function updateTimer(seconds) {
+  let minutes = Math.floor(seconds / 60);
+  let remainingSeconds = seconds % 60;
+  countdownElement.textContent = `${minutes}:${remainingSeconds
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+function handleTimeUp() {
+  // Perform any actions when the timer reaches 0
+  alert("Time is up! Your quiz will be submitted.");
+  // You can add code here to automatically submit the quiz or show a warning message to the user.
+}
+
+// Start the timer when the page loads
+window.onload = function () {
+  startTimer();
+};
