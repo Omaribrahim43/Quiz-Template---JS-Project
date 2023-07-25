@@ -19,6 +19,63 @@ registerButton.addEventListener("click", () => {
   registerForm.style.display = "block";
 });
 
+function onSignIn(googleUser) {
+  // This function is called when the user signs in successfully.
+  const profile = googleUser.getBasicProfile();
+  const idToken = googleUser.getAuthResponse().id_token;
+  // You can now use the 'idToken' to authenticate the user on your backend.
+  // Send the 'idToken' to your server via an API call for further verification and authentication.
+
+  // For example, you can send the 'idToken' using a fetch API:
+  fetch("/your-backend-endpoint", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ idToken }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response from the backend
+      console.log(data);
+    })
+    .catch((error) => {
+      // Handle any errors that occur during the fetch
+      console.error("Error:", error);
+    });
+}
+
+function signOut() {
+  // This function is called when the user clicks the sign-out button.
+  const auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log("User signed out.");
+  });
+}
+
+// Initialize the Google Sign-In button
+function initGoogleSignIn() {
+  gapi.load("auth2", function () {
+    gapi.auth2.init({
+      client_id:
+        "794603395203-kr6l4uot3fr5ukdlhm2masdhmvflbgla.apps.googleusercontent.com",
+      scope: "profile",
+    });
+  });
+
+  // Add event listener to the sign-in button
+  document
+    .getElementById("google-signin-button")
+    .addEventListener("click", function () {
+      gapi.auth2.getAuthInstance().signIn().then(onSignIn);
+    });
+}
+
+// Call the initialization function when the page is loaded
+window.onload = function () {
+  initGoogleSignIn();
+}; 
+
 const registrationInputs = document.querySelectorAll(
   "#registerForm .input-field input"
 );
