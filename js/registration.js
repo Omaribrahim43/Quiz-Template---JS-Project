@@ -4,7 +4,6 @@ const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const regBTN = document.getElementById("regBTN");
 const logBTN = document.getElementById("logBTN");
-
 loginButton.addEventListener("click", () => {
   loginButton.classList.add("active");
   registerButton.classList.remove("active");
@@ -18,7 +17,6 @@ registerButton.addEventListener("click", () => {
   loginForm.style.display = "none";
   registerForm.style.display = "block";
 });
-
 
 const registrationInputs = document.querySelectorAll(
   "#registerForm .input-field input"
@@ -80,8 +78,6 @@ registrationInputs[2].onkeyup = () => {
 
 // regEx for repeated password
 registrationInputs[3].onkeyup = () => {
-  let regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
   if (registrationInputs[3].value === "") {
     document.getElementById("c-pass-message").innerHTML = "";
   } else {
@@ -101,7 +97,7 @@ if (JSON.parse(u)) {
   registerButton.classList.remove("active");
   loginForm.style.display = "block";
   registerForm.style.display = "none";
-} else{
+} else {
   loginButton.classList.remove("active");
   registerButton.classList.add("active");
   loginForm.style.display = "none";
@@ -129,14 +125,24 @@ regBTN.onclick = function () {
     document.getElementById("pass-message").style.color === "green" &&
     document.getElementById("c-pass-message").style.color === "green"
   ) {
-    window.alert("registration success");
+    localStorage.setItem("noAcc", true)
+    if (JSON.parse(localStorage.noAcc)){
+      loginButton.classList.add("active");
+      registerButton.classList.remove("active");
+      loginForm.style.display = "block";
+      registerForm.style.display = "none";
+      window.alert("registration success");
+    } 
     let users1 = [];
     let user = {
       id: getNewUserID(),
       email: email1,
       username: username1,
       password: password1,
+      isLoggedIn: false,
+      isAttempt: false,
     };
+
     if (localStorage.users != null) {
       users1 = JSON.parse(localStorage.users);
     } else {
@@ -156,27 +162,29 @@ logBTN.onclick = function () {
   let inputPassword = pas.value;
 
   if (localStorage.users != null) {
-    let users1 = JSON.parse(localStorage.users);
+    let users = JSON.parse(localStorage.users);
     let loggedInUser = null;
     // Check if the inputEmailOrUsername matches any user's email or username
-    for (let i = 0; i < users1.length; i++) {
+    for (let i = 0; i < users.length; i++) {
       if (
-        users1[i].email === inputEmailOrUsername ||
-        users1[i].username === inputEmailOrUsername
+        users[i].email === inputEmailOrUsername ||
+        users[i].username === inputEmailOrUsername
       ) {
-        loggedInUser = users1[i];
+        loggedInUser = users[i];
         break;
       }
     }
     if (loggedInUser !== null && loggedInUser.password === inputPassword) {
-      window.location.assign("/index.html");
-      let user = [];
-      user.push(loggedInUser.username);
-      user.push(true);
-      localStorage.setItem("user", JSON.stringify(user));
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].username == inputEmailOrUsername) {
+          users[i].isLoggedIn = true;
+        }
+      }
     } else {
       window.alert("Invalid credentials. Please try again.");
     }
+    localStorage.setItem("users", JSON.stringify(users));
+    window.location.assign("/index.html");
   } else {
     window.alert("No registered users found. Please register first.");
   }

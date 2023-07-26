@@ -1,21 +1,22 @@
 const loginButtonIndex = document.getElementById("login");
 const signUpButtonIndex = document.getElementById("signup");
 const logoutButtonIndex = document.getElementById("logout");
-const login = localStorage.getItem("user");
+const users = JSON.parse(localStorage.users);
 // ----------------------------------------------------------
 // take the user to the login page
 loginButtonIndex.addEventListener("click", function () {
   // take the user to the login page.
-  localStorage.setItem(login[0], "");
-  localStorage.setItem(login[1], false);
   localStorage.setItem("noAcc", true);
   window.location.assign("/pages/registration.html");
 });
 // ----------------------------------------------------------
 // it logouts the user.
 logoutButtonIndex.addEventListener("click", function () {
-  localStorage.setItem("user", JSON.stringify(["", false]));
-  window.location.assign("/pages/registration.html");
+  for (let i = 0; i < users.length; i++) {
+    users[i].isLoggedIn = false;
+  }
+  localStorage.setItem("users", JSON.stringify(users));
+  location.reload();
 });
 // ----------------------------------------------------------
 // take the user to the registration page.
@@ -29,22 +30,33 @@ signUpButtonIndex.addEventListener("click", function () {
 const quizButton = document.getElementById("start-quiz-btn");
 quizButton.addEventListener("click", function () {
   // go to the rules page
-  window.location.assign("../pages/rules.html");
+  // for (let i = 0; i < JSON.parse(localStorage.attempts).length; i++) {
+  //   if (
+  //     JSON.parse(localStorage.user)[0] ==
+  //     JSON.parse(localStorage.attempts)[i].username
+  //   ) {
+  //     window.location.assign("pages/result.html");
+  //   } else {
+  window.location.assign("pages/rules.html");
+  //   }
+  // }
 });
 
 // ----------------------------------------------------------
 // checking if there is a user logged in or not to edit the content of the navbar.
-
-if (JSON.parse(login)[1] === true) {
-  loginButtonIndex.style.display = "none";
-  signUpButtonIndex.style.display = "none";
-  logoutButtonIndex.style.display = "inline-block";
-  document.getElementById("welcomeUsername").innerText = `${
-    JSON.parse(login)[0]
-  }`;
-} else {
-  loginButtonIndex.style.display = "inline-block";
-  signUpButtonIndex.style.display = "inline-block";
-  logoutButtonIndex.style.display = "none";
-  document.getElementById("welcomeUsername").display = "none";
+for (let i = 0; i < users.length; i++) {
+  if (users[i].isLoggedIn === true) {
+    loginButtonIndex.style.display = "none";
+    signUpButtonIndex.style.display = "none";
+    logoutButtonIndex.style.display = "inline-block";
+    document.getElementById(
+      "welcomeUsername"
+    ).innerText = `${users[i].username}`;
+    break;
+  } else {
+    loginButtonIndex.style.display = "inline-block";
+    signUpButtonIndex.style.display = "inline-block";
+    logoutButtonIndex.style.display = "none";
+    document.getElementById("welcomeUsername").display = "none";
+  }
 }

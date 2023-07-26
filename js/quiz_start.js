@@ -6,14 +6,8 @@ let radio1 = document.getElementById("radio1");
 let radio2 = document.getElementById("radio2");
 let radio3 = document.getElementById("radio3");
 let radio4 = document.getElementById("radio4");
-// let input=document.querySelectorAll("input")
-// console.log(input);
-{
-  /* <input type="radio" name="answer" id="radio1">
-<label class="contentofanswer" for="radio1"> */
-}
+let namescat = document.getElementsByClassName("namescat");
 
-// to change background color
 let value_of_local = [];
 
 box_of_quastion.addEventListener("click", function (event) {
@@ -39,8 +33,10 @@ let countofquastion = 0;
 let arr = 0;
 let countofpage_tch = 0;
 let correct = 0;
+// document.getElementById("Name").innerHTML = JSON.parse(login)[0];
 
 // event in next button
+let quizzqount = 0;
 
 next.addEventListener("click", function (event) {
   let input = document.querySelectorAll("input");
@@ -58,38 +54,37 @@ next.addEventListener("click", function (event) {
       if (input[i].checked) {
         let value_of_answer =
           input[i].parentElement.children[1].textContent.trim();
-        console.log(typeof value_of_local);
         value_of_local.push(value_of_answer);
-        console.log(value_of_local);
         localStorage.setItem("Answer", JSON.stringify(value_of_local));
       }
     }
     countofquastion += 1;
     countofpage += 1;
     arr += 1;
-    let quize = ["IQ Quiz", "English Quiz"];
+    let quize = ["IQ Quiz", "English Quiz", "Technical Quiz"];
     // strar put contant in in page
-    // console.log(countofpage);
     if (countofquastion < 10) {
       if (countofpage <= 5) {
-        category.innerHTML = quize[0];
+        namescat[0].innerHTML = quize[quizzqount];
 
         next.innerHTML = "Next Question";
 
         let nextquastion = ` <p id="numofquestion">${countofpage}/5</p><div id="question"> ${json[arr].question} </div>
 <div id="answers"><div class="answer1 answer"> <input type="radio" name="answer" id="radio1"><label class="contentofanswer" for="radio1"> ${json[arr].answers.answer_a}
   </label ></div><div class="answer2 answer"><input type="radio" name="answer" id="radio2">
- <label class="contentofanswer">${json[arr].answers.answer_b}</label></div><div class="answer3 answer">
-<input type="radio" name="answer" id="radio3"><label class="contentofanswer"> ${json[arr].answers.answer_c}</label>
+ <label class="contentofanswer" for="radio2">${json[arr].answers.answer_b}</label></div><div class="answer3 answer">
+<input type="radio" name="answer" id="radio3"><label class="contentofanswer" for="radio3"> ${json[arr].answers.answer_c}</label>
    </div><div class="answer4 answer"><input type="radio" name="answer" id="radio4">
-<label class="contentofanswer" for="radio">${json[arr].answers.answer_d}</label></div></div> `;
+<label class="contentofanswer" for="radio4">${json[arr].answers.answer_d}</label></div></div> `;
 
         box_of_quastion.innerHTML = nextquastion;
       } else if (countofquastion === 5) {
+        quizzqount += 1;
         let fixed = document.getElementById("fixed");
         let button1 = document.getElementsByClassName("button1")[0];
         fixed.style.display = "flex";
         fixed.style.zIndex = "10";
+        namescat[0].innerHTML = quize[quizzqount];
 
         next.innerHTML = "Next Question";
         // arr -= 1;
@@ -117,14 +112,14 @@ ${countofpage}/5
  <div class="answer2 answer">
 
     <input type="radio" name="answer" id="radio2">
-   <label class="contentofanswer">
+   <label class="contentofanswer" for="radio2">
    ${json[arr].answers.answer_b}
 </label>
 </div>
 <!-- box3  -->
 <div class="answer3 answer">
   <input type="radio" name="answer" id="radio3">
- <label class="contentofanswer">
+ <label class="contentofanswer" for="radio3">
  ${json[arr].answers.answer_c}
 </label>
 </div>
@@ -132,7 +127,7 @@ ${countofpage}/5
 
    <div class="answer4 answer">
       <input type="radio" name="answer" id="radio4">
-     <label class="contentofanswer" for="radio">
+     <label class="contentofanswer" for="radio4">
      ${json[arr].answers.answer_d}
 </label>
  </div>
@@ -146,6 +141,8 @@ ${countofpage}/5
       }
     } else if (countofquastion == 10) {
       // arr-=1
+      quizzqount = 2;
+
       category.innerHTML = `Technical Quiz`;
       let fixed = document.getElementById("fixed2");
 
@@ -160,10 +157,9 @@ ${countofpage}/5
     }
 
     if (countofquastion >= 10 && countofquastion < 20) {
-      category.innerHTML = `Technical Quiz`;
+      namescat[0].innerHTML = quize[quizzqount];
 
       next.innerHTML = "Next Question";
-      console.log("dd");
       countofpage_tch += 1;
       let nextquastion = `
     <p id="numofquestion">
@@ -186,14 +182,14 @@ ${countofpage}/5
      <div class="answer2 answer">
 
         <input type="radio" name="answer" id="radio2">
-       <label class="contentofanswer">
+       <label class="contentofanswer" for="radio2">
        ${json[arr].answers.answer_b}
  </label>
    </div>
    <!-- box3  -->
 <div class="answer3 answer">
       <input type="radio" name="answer" id="radio3">
-     <label class="contentofanswer">
+     <label class="contentofanswer" for="radio3">
      ${json[arr].answers.answer_c}
 </label>
  </div>
@@ -201,7 +197,7 @@ ${countofpage}/5
 
        <div class="answer4 answer">
           <input type="radio" name="answer" id="radio4">
-         <label class="contentofanswer" for="radio">
+         <label class="contentofanswer" for="radio4">
          ${json[arr].answers.answer_d}
 </label>
      </div>
@@ -245,39 +241,3 @@ ${countofpage}/5
   }
 });
 json1.send();
-let countdownElement = document.getElementById("countdown");
-let timerInterval;
-let timerSeconds = 1200; // Total time in seconds (2 minutes)
-
-function startTimer() {
-  let currentTime = timerSeconds;
-  timerInterval = setInterval(() => {
-    currentTime--;
-    if (currentTime >= 0) {
-      updateTimer(currentTime);
-    } else {
-      clearInterval(timerInterval);
-      // Handle time up here (e.g., submitting the quiz)
-      handleTimeUp();
-    }
-  }, 1000);
-}
-
-function updateTimer(seconds) {
-  let minutes = Math.floor(seconds / 60);
-  let remainingSeconds = seconds % 60;
-  countdownElement.textContent = `${minutes}:${remainingSeconds
-    .toString()
-    .padStart(2, "0")}`;
-}
-
-function handleTimeUp() {
-  // Perform any actions when the timer reaches 0
-  alert("Time is up! Your quiz will be submitted.");
-  // You can add code here to automatically submit the quiz or show a warning message to the user.
-}
-
-// Start the timer when the page loads
-window.onload = function () {
-  startTimer();
-};

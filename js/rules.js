@@ -1,19 +1,25 @@
 let startQuiz = document.getElementById("start");
 let exit = document.getElementById("exit");
-const login = localStorage.getItem("user");
+let users = JSON.parse(localStorage.users);
 
-document.getElementById("Name").innerHTML = JSON.parse(login)[0];
+// document.getElementById("Name").innerHTML = users.username;
 startQuiz.addEventListener("click", function () {
   // if he is logged in.
-  if (JSON.parse(login)[1]) {
-    window.location.assign("../pages/quiz_start.html");
-    
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].isLoggedIn) {
+      if (users[i].isAttempt) {
+        window.location.assign("../Pages/result.html");
+        break
+      } else {
+        window.location.assign("../Pages/quiz_start.html");
+        break
+      }
+    } 
+    if(!users[i].isLoggedIn){
+        window.location.assign("../pages/registration.html");
+    }
   }
-  // if he is not logged in.
-  else {
-    window.alert("Log in first or create an account");
-    window.location.assign("../Pages/registration.html");
-  }
+  localStorage.setItem("users", JSON.stringify(users));
 });
 
 exit.addEventListener("click", function () {

@@ -282,16 +282,38 @@ body {
 }
 
 div#timer {
-  position: relative;
+  position: fixed;
+  right: 0;
+  top: 35%;
   background-color: #3d8cfa;
   color: white;
-  padding: 10px;
-  border-radius: 0 12px 12px 0;
+  padding: 20px;
+  border-radius: 12px 0 0 12px;
   font-weight: 600;
-  width: 10%;
+  width: 15%;
+  display: inline-block;
 }
 
 div#timer #countdown {
-  position: absolute;
   padding-left: 10px;
+}
+
+#finishQuiz {
+  background-color: #a8a1fd;
+  width: 300px;
+  background-color: #a8a1fd;
+  height: 60px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bolder;
+  margin: 50px;
+  border-style: none;
+  font-size: 25px;
+  margin-left: 40%;
+  margin-top: 10%;
+}
+#finishQuiz:hover {
+  scale: 1.05;
+  background-color: #3d8cfa;
+  box-shadow: 5px 5px 10px 5px rgba(94, 92, 154, 0.35);
 }

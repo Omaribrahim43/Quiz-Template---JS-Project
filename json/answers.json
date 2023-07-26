@@ -66,7 +66,7 @@
       "answer_d": "Ocean"
     },
     "multiple_correct_answers": "false",
-    "correct_answers": "Animal"
+    "correct_answers": "Ocean"
   },
 
   {
@@ -198,7 +198,7 @@
       "answer_d": "Text-color:"
     },
     "multiple_correct_answers": "false",
-    "correct_answers": "Text-color:"
+    "correct_answers": "Color:"
   },
   {
     "id": 16,
@@ -266,7 +266,7 @@
     "correct_answers": "Break tag"
   },
   {
-    "id": 18,
+    "id": 21,
     "question": "If we want to print any message in message box we use _____ in javascript?",
     "description": null,
     "answers": {
@@ -279,7 +279,7 @@
     "correct_answers": "Alert box"
   },
   {
-    "id": 19,
+    "id": 22,
     "question": "push () is which type of function?",
     "description": null,
     "answers": {
@@ -292,7 +292,7 @@
     "correct_answers": "Array"
   },
   {
-    "id": 20,
+    "id": 23,
     "question": "< br / > What type of tag is this?",
     "description": null,
     "answers": {

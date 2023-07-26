@@ -227,5 +227,33 @@ body {
   body {
     background-image: url(../images/login-registration-background-phone.png);
   }
+  .container .row {
+    flex-direction: column  ;
+  }
+  .container .row {
+    align-items: start;
+  }
+  .container .row .right-section {
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .container .row .left-section p{
+    display: none;
+  }
+  .container .row .left-section h1 {
+    display: none;
+  }
+  .container .row .left-section .logSign {
+    width: 100%;
+    margin-left: 20%;
+    margin-bottom: 10%;
+  }
+  .container .row .left-section .logSign #showlogin{
+    font-size: 12px;
+  }
+  .container .row .left-section .logSign #showregister {
+    font-size: 12px;
+  }
 }
 /* END LANDING CONTENT */
