@@ -51,7 +51,7 @@ for (let i = 0; i < users.length; i++) {
     logoutButtonIndex.style.display = "inline-block";
     document.getElementById(
       "welcomeUsername"
-    ).innerText = `${users[i].username}`;
+    ).innerText = `Welcome ${users[i].username}`;
     break;
   } else {
     loginButtonIndex.style.display = "inline-block";

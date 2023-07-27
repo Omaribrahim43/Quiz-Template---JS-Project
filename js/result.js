@@ -7,7 +7,7 @@ corrAnswers.onload = function () {
   for (let i = 0; i < data.length; i++) {
     rightAns.push(data[i].correct_answers);
   }
-  for (i = 0; i <= 20; i++) {
+  for (i = 0; i < 20; i++) {
     body.innerHTML += `
    <div class="quiz-container">
     <h4 class="h">Question. ${[i + 1]}</h4> <br>
@@ -30,10 +30,9 @@ corrAnswers.onload = function () {
   </div>
   `;
   }
+
   submittedAns = localStorage.getItem("Answer");
   submittedAnsjson = JSON.parse(submittedAns);
-  console.log(submittedAnsjson);
-  console.log(rightAns);
   let label = document.querySelectorAll(".answers .answer label");
   for (let i = 0; i < rightAns.length; i++) {
     if (submittedAnsjson[i] === rightAns[i].trim()) {
@@ -43,7 +42,6 @@ corrAnswers.onload = function () {
           label[j].style.color = "white";
           label[j].style.padding = "10px";
           label[j].style.borderRadius = "8px";
-          
         }
       }
     } else {
@@ -74,3 +72,4 @@ corrAnswers.onload = function () {
 };
 
 corrAnswers.send();
+
